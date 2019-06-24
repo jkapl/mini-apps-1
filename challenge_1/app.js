@@ -3,15 +3,21 @@ let currentPlayer = 'Player 1';
 
 let resetButton = document.getElementById('reset')
 resetButton.addEventListener('click', ()=> {
-  console.log('clicked');
+  reset();
 });
 
 const reset = () => {
-  let board = document.getElementById('board');
+  let squares = document.querySelectorAll('td');
   currentPlayer = 'Player 1';
-  
-};
 
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].innerText = '[  ]'
+    squares[i].addEventListener('click', ()=> {
+      event.currentTarget.innerText = '[ x ]'
+    })
+  };
+};
+reset();
 
 //check methods
 const verticalCheck = () => {
@@ -27,5 +33,7 @@ const diagCheck = () => {
 }
 
 //play methods
-
+const addToe = (event) => {
+  // event.currentTarget
+}
 
