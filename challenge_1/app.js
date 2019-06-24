@@ -1,5 +1,8 @@
 // initialization
-let currentPlayer = 'Player 1';
+let players = { 
+  'Player 1' : true
+}
+let squares = document.querySelectorAll('td');
 
 let resetButton = document.getElementById('reset')
 resetButton.addEventListener('click', ()=> {
@@ -7,13 +10,13 @@ resetButton.addEventListener('click', ()=> {
 });
 
 const reset = () => {
-  let squares = document.querySelectorAll('td');
   currentPlayer = 'Player 1';
 
   for (let i = 0; i < squares.length; i++) {
     squares[i].innerText = '[  ]'
-    squares[i].addEventListener('click', ()=> {
-      event.currentTarget.innerText = '[ x ]'
+    squares[i].addEventListener('click', (event)=> {
+      // event.currentTarget.innerText = '[ x ]'
+      addToe(event);
     })
   };
 };
@@ -34,6 +37,11 @@ const diagCheck = () => {
 
 //play methods
 const addToe = (event) => {
-  // event.currentTarget
+  if (players["Player 1"]) {
+    event.currentTarget.innerText = '[  x  ]'
+  } else {
+    event.currentTarget.innerText = '[  o  ]'
+  }
+  players['Player 1'] = !players['Player 1'];
 }
 
