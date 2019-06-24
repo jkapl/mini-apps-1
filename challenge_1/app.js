@@ -28,9 +28,7 @@ reset();
 const verticalCheck = () => {
   let emptySq = '[ ]'
   for (var i = 0; i < 3; i++) {
-    if ( (squares[i].innerText === squares[i+3].innerText) && 
-    squares[i+3].innerText && squares[i+6].innerText && 
-    ( squares[i].innerText !== emptySq && squares[i+3].innerText!== emptySq && squares[i+6].innerText!== emptySq)) {
+    if ( (squares[i].innerText === squares[i+3].innerText) && (squares[i+3].innerText === squares[i+6].innerText)  &&  (squares[i].innerText !== emptySq)   ) {
       winFunc();
     }
   }
