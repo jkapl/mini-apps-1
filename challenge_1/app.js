@@ -3,10 +3,12 @@ let players = {
   'Player 1' : true
 }
 let squares = document.querySelectorAll('td');
-let resetButton = document.getElementById('reset')
+let resetButton = document.getElementById('reset');
+let winDisplay = document.getElementById('win');
 resetButton.addEventListener('click', ()=> {
   reset();
 });
+
 for (var i = 0; i < squares.length; i++) {
   squares[i].addEventListener('click', (event)=> {
     addToe(event);
@@ -15,6 +17,7 @@ for (var i = 0; i < squares.length; i++) {
 
 const reset = () => {
   players['Player 1'] = true;
+  winDisplay.innerText = '';
   for (let i = 0; i < squares.length; i++) {
     squares[i].innerText = '[    ]' 
   };
@@ -28,27 +31,27 @@ const verticalCheck = () => {
     if ( (squares[i].innerText === squares[i+3].innerText) && 
     squares[i+3].innerText && squares[i+6].innerText && 
     ( squares[i].innerText !== emptySq && squares[i+3].innerText!== emptySq && squares[i+6].innerText!== emptySq)) {
-      console.log('vertical win')
+      winFunc();
     }
   }
 }
 
 const horizCheck = () => {
-  let emptySq = '[ ]'
+  let emptySq = '[ ]';
   for (var i = 0; i < 3; i++) {
     if ( (squares[i].innerText === squares[i+1].innerText ) && 
     (squares[i+1].innerText === squares[i+2].innerText) && 
     ( squares[i].innerText !== emptySq && squares[i+1].innerText !== emptySq && squares[i+3]!== emptySq)) {
-      console.log('horiz win')
+      winFunc();
     }
   }
 }
 
 const diagCheck = () => {
-  for (var i = 0; i < 2; i++) {
-    
+  let emptySq = '[ ]';
+  if ( (squares[4].innerText !== emptySq) && ( (squares[0].innerText === squares[4].innerText) && (squares[4].innerText === squares[8].innerText) || ( (squares[2].innerText === squares[4].innerText) && (squares[4].innerText === squares[6].innerText) ) ) ) {
+    winFunc();
   }
-
 }
 
 //play methods
@@ -63,5 +66,11 @@ const addToe = (event) => {
   console.log(players['Player 1'] + ' after')
   horizCheck();
   verticalCheck();
+  diagCheck();
+}
+
+const winFunc = () => {
+  let winner = players["Player 1"] ? 'Player 2' : 'Player 1';
+  winDisplay.innerText = winner + ' wins!';
 }
 
