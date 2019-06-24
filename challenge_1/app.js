@@ -2,6 +2,11 @@
 let players = { 
   'Player 1' : true
 }
+
+let winners = {
+  'Player 1' : 0,
+  'Player 2' : 0
+}
 let squares = document.querySelectorAll('td');
 let resetButton = document.getElementById('reset');
 let winDisplay = document.getElementById('win');
@@ -13,7 +18,7 @@ for (var i = 0; i < squares.length; i++) {
   squares[i].addEventListener('click', (event)=> {
     addToe(event);
   })
-}
+};
 
 const reset = () => {
   players['Player 1'] = true;
@@ -32,25 +37,29 @@ const verticalCheck = () => {
       winFunc();
     }
   }
-}
+};
 
 const horizCheck = () => {
   let emptySq = '[ ]';
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 7; i=i+3) {
     if ( (squares[i].innerText === squares[i+1].innerText ) && 
     (squares[i+1].innerText === squares[i+2].innerText) && 
-    ( squares[i].innerText !== emptySq && squares[i+1].innerText !== emptySq && squares[i+3]!== emptySq)) {
+    ( squares[i].innerText !== emptySq && squares[i+1].innerText !== emptySq && squares[i+2].innerText!== emptySq)) {
       winFunc();
     }
   }
-}
+};
 
 const diagCheck = () => {
   let emptySq = '[ ]';
-  if ( (squares[4].innerText !== emptySq) && ( (squares[0].innerText === squares[4].innerText) && (squares[4].innerText === squares[8].innerText) || ( (squares[2].innerText === squares[4].innerText) && (squares[4].innerText === squares[6].innerText) ) ) ) {
+  if ( (squares[4].innerText !== emptySq) && 
+  ( (squares[0].innerText === squares[4].innerText) && 
+  (squares[4].innerText === squares[8].innerText) || 
+  ( (squares[2].innerText === squares[4].innerText) && 
+  (squares[4].innerText === squares[6].innerText) ) ) ) {
     winFunc();
   }
-}
+};
 
 //play methods
 const addToe = (event) => {
@@ -65,10 +74,12 @@ const addToe = (event) => {
   horizCheck();
   verticalCheck();
   diagCheck();
-}
+};
 
 const winFunc = () => {
   let winner = players["Player 1"] ? 'Player 2' : 'Player 1';
   winDisplay.innerText = winner + ' wins!';
-}
+  winners.winner++;
+  console.log(winners.winner);
+};
 
