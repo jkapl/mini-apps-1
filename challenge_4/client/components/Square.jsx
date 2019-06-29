@@ -1,25 +1,34 @@
 import React from 'react';
+import { runInThisContext } from 'vm';
 
 class Square extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      color: null
     }
 
     this.setToken = this.setToken.bind(this);
   }
 
   setToken() {
-    if (this.state.blue || this.state.red) {
+    if (this.state.color) {
       return
     } else {
-      this.state.color = this.props.turn;
+      this.setState({color: this.props.turn})
+      this.props.turnHandler();
     }
   }
 
   render() {
-    return <td className="square" onClick={()=> {style={color: this.state.color}}} y={this.props.y} x={this.props.x}>x</td>
+    const squareStyle = {
+      border: '2px solid grey',
+      height: '60px',
+      width: '60px',
+      background: this.state.color
+    }
+    return <td className="square" style ={squareStyle} onClick={ ()=> this.setToken() } y={this.props.y} x={this.props.x}></td>
   }
 }
 
