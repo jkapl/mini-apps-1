@@ -6,14 +6,14 @@ class Board extends React.Component {
     super(props)
 
     this.state = {
-      n: 5
+      turn: 'blue'
     }
   }
 
   render() {
     let board = [];
-    for (var i = 0; i < 6; i++) {
-      board.push(<><Row /></>);
+    for (var i = 5; i >= 0; i--) {
+      board.push(<><Row turn={this.state.turn} y={i} /></>);
     }
     return <table><tbody>{board}</tbody></table>;
   }

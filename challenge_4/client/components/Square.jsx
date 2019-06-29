@@ -4,12 +4,22 @@ class Square extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+    }
+
+    this.setToken = this.setToken.bind(this);
+  }
+
+  setToken() {
+    if (this.state.blue || this.state.red) {
+      return
+    } else {
+      this.state.color = this.props.turn;
+    }
   }
 
   render() {
-    const { x, y } = this.props;
-    return <td className="square" x={x} y={y}>x</td>
+    return <td className="square" onClick={()=> {style={color: this.state.color}}} y={this.props.y} x={this.props.x}>x</td>
   }
 }
 
