@@ -4,10 +4,7 @@ import Square from './Square.jsx';
 // class Row extends React.Component {
 //   constructor(props) {
 //     super(props)
-
-
 //   }
-
 //   render() {
 //     let row = [];
 //     for (var i = 0; i < 7; i++) {

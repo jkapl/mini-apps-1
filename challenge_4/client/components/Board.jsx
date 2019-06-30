@@ -1,5 +1,6 @@
 import React from 'react';
 import Row from './Row.jsx';
+import verticalCheck from '../src/index.jsx'
 
 class Board extends React.Component {
   constructor(props) {
@@ -8,18 +9,17 @@ class Board extends React.Component {
     this.state = {
       turn: 'blue'
     }
-    
+
     this.turnHandler = this.turnHandler.bind(this);
   }
   
   turnHandler() {
-    console.log('made it here too')
     if (this.state.turn === 'blue') {
       this.setState({turn: 'red'})
     } else {
-      console.log('in state change on board')
       this.setState({turn: 'blue'});
     }
+    verticalCheck();
   }
   render() {
     let board = [];
